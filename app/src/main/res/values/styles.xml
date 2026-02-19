@@ -5,4 +5,21 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textAlignment">center</item>
     </style>
+
+    <style name="Theme.Planner.BottomSheet" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.Planner.BottomSheet</item>
+    </style>
+
+    <style name="Widget.Planner.BottomSheet" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.Planner.BottomSheet</item>
+    </style>
+
+    <style name="ShapeAppearance.Planner.BottomSheet" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">@dimen/md_16dp</item>
+        <item name="cornerSizeTopRight">@dimen/md_16dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
 </resources>

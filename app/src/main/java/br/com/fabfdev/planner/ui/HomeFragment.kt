@@ -25,7 +25,13 @@ class HomeFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
-            // TODO logica
+            btnSaveNewPlannerActivity.setOnClickListener {
+                UpdatePlannerActivityDialogFragment()
+                    .show(
+                        childFragmentManager,
+                        UpdatePlannerActivityDialogFragment.TAG
+                    )
+            }
         }
     }
 

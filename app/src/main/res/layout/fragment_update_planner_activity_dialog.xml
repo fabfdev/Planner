@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/zinc_800"
     android:padding="@dimen/md_16dp"
     tools:context=".ui.UpdatePlannerActivityDialogFragment">
 
@@ -80,11 +79,13 @@
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
+        style="@style/ThemeOverlay.Material3.Button.ElevatedButton"
         android:id="@+id/btnSaveUpdatedPlannerActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/salvar_usuario"
         android:textColor="@color/lime_950"
+        android:backgroundTint="@color/lime_300"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llUpdatedPlannerActivity" />

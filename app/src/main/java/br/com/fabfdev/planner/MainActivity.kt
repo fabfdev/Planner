@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import br.com.fabfdev.planner.databinding.ActivityMainBinding
-import br.com.fabfdev.planner.ui.UpdatePlannerActivityDialogFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,9 +24,6 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.fl, UpdatePlannerActivityDialogFragment())
-            .commit()
+
     }
 }

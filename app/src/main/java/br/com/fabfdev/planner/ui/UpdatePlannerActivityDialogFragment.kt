@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import br.com.fabfdev.planner.R
 import br.com.fabfdev.planner.databinding.FragmentUpdatePlannerActivityDialogBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -11,6 +12,10 @@ class UpdatePlannerActivityDialogFragment : BottomSheetDialogFragment() {
 
     private var _binding: FragmentUpdatePlannerActivityDialogBinding? = null
     private val binding get() = _binding!!
+
+    override fun getTheme(): Int {
+        return R.style.Theme_Planner_BottomSheet
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,6 +29,10 @@ class UpdatePlannerActivityDialogFragment : BottomSheetDialogFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        const val TAG = "UpdatePlannerActivityDialogFragment"
     }
 
 }
