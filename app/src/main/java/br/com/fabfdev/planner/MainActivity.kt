@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import br.com.fabfdev.planner.databinding.ActivityMainBinding
-import br.com.fabfdev.planner.ui.UserRegistrationFragment
+import br.com.fabfdev.planner.ui.InitialLoadingFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager
             .beginTransaction()
-            .add(R.id.fl, UserRegistrationFragment())
+            .add(R.id.fl, InitialLoadingFragment())
             .commit()
     }
 }

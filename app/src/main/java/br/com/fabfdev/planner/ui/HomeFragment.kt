@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import br.com.fabfdev.planner.databinding.FragmentUserRegistrationBinding
+import br.com.fabfdev.planner.databinding.FragmentHomeBinding
 
-class UserRegistrationFragment : Fragment() {
+class HomeFragment: Fragment() {
 
-    private var _binding: FragmentUserRegistrationBinding? = null
+    private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -17,7 +17,7 @@ class UserRegistrationFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentUserRegistrationBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -25,7 +25,7 @@ class UserRegistrationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
-            // TODO: lógica da tela de cadastro de usuário
+            // TODO logica
         }
     }
 
