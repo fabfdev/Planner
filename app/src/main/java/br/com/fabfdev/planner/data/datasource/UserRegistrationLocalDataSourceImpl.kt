@@ -1,6 +1,5 @@
 package br.com.fabfdev.planner.data.datasource
 
-import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
@@ -9,7 +8,7 @@ private const val USER_REGISTRATION_FILE_NAME = "user_registration"
 private const val IS_USER_REGISTERED_KEY = "is_user_registered"
 
 class UserRegistrationLocalDataSourceImpl(
-    applicationContext: Application,
+    applicationContext: Context,
 ): UserRegistrationLocalDataSource {
 
     val userRegistrationSharedPreferences: SharedPreferences =

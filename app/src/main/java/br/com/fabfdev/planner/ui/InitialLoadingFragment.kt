@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import br.com.fabfdev.planner.R
 import br.com.fabfdev.planner.databinding.FragmentInitialLoadingBinding
+import br.com.fabfdev.planner.ui.viewmodel.UserRegistrationViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -20,6 +22,8 @@ class InitialLoadingFragment : Fragment() {
     private val navController by lazy {
         findNavController()
     }
+
+    private val userRegistrationViewModel by viewModels<UserRegistrationViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,11 +37,14 @@ class InitialLoadingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(binding) {
-            lifecycleScope.launch {
-                delay(1_500L)
-                navController.navigate(R.id.action_initialLoadingFragment_to_userRegistrationFragment)
+        lifecycleScope.launch {
+            delay(1_500L)
+            val navigateTo = if (userRegistrationViewModel.isUserRegistered()) {
+                R.id.action_initialLoadingFragment_to_homeFragment
+            } else {
+                R.id.action_initialLoadingFragment_to_userRegistrationFragment
             }
+            navController.navigate(navigateTo)
         }
     }
 
