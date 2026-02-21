@@ -37,6 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/img_add_button"
+                android:scaleType="centerCrop"
                 android:contentDescription="@string/botao_adicionar_foto_de_usuario" />
 
         </androidx.cardview.widget.CardView>
@@ -93,7 +94,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/salvar_usuario"
-        android:textColor="@color/lime_950"
+        android:textColor="@drawable/txt_color_btn"
+        android:enabled="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

@@ -4,12 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import br.com.fabfdev.planner.R
 import br.com.fabfdev.planner.databinding.FragmentUserRegistrationBinding
 import br.com.fabfdev.planner.ui.viewmodel.UserRegistrationViewModel
+import kotlinx.coroutines.launch
 
 class UserRegistrationFragment : Fragment() {
 
@@ -21,6 +27,21 @@ class UserRegistrationFragment : Fragment() {
     }
 
     private val userRegistrationViewModel by viewModels<UserRegistrationViewModel>()
+
+    private val pickMedia = registerForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ) { uri ->
+        if (uri != null) {
+            binding.ivAddPhoto.setImageURI(uri)
+            userRegistrationViewModel.updateProfile(image = uri.toString())
+        } else {
+            Toast.makeText(
+                requireContext(),
+                "Nenhuma foto selecionada",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,10 +55,46 @@ class UserRegistrationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupObservers()
+
         with(binding) {
+            ivAddPhoto.setOnClickListener {
+                pickMedia.launch(
+                    PickVisualMediaRequest(
+                        ActivityResultContracts.PickVisualMedia.ImageOnly
+                    )
+                )
+            }
+
+            tietName.addTextChangedListener { text ->
+                userRegistrationViewModel.updateProfile(
+                    name = text.toString()
+                )
+            }
+
+            tietEmail.addTextChangedListener { text ->
+                userRegistrationViewModel.updateProfile(
+                    email = text.toString()
+                )
+            }
+
+            tietPhone.addTextChangedListener { text ->
+                userRegistrationViewModel.updateProfile(
+                    phone = text.toString()
+                )
+            }
+
             btnSaveUser.setOnClickListener {
                 userRegistrationViewModel.saveIsUserRegistered(true)
                 navController.navigate(R.id.action_userRegistrationFragment_to_homeFragment)
+            }
+        }
+    }
+
+    private fun setupObservers() {
+        lifecycleScope.launch {
+            userRegistrationViewModel.isProfileValid.collect { isValid ->
+                binding.btnSaveUser.isEnabled = isValid
             }
         }
     }
