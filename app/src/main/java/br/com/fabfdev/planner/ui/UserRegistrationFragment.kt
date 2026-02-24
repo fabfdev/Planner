@@ -13,6 +13,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import br.com.fabfdev.planner.R
+import br.com.fabfdev.planner.data.utils.imageBitmapToBase64
+import br.com.fabfdev.planner.data.utils.imageUriToBitmap
 import br.com.fabfdev.planner.databinding.FragmentUserRegistrationBinding
 import br.com.fabfdev.planner.ui.viewmodel.UserRegistrationViewModel
 import kotlinx.coroutines.launch
@@ -32,8 +34,12 @@ class UserRegistrationFragment : Fragment() {
         ActivityResultContracts.PickVisualMedia()
     ) { uri ->
         if (uri != null) {
-            binding.ivAddPhoto.setImageURI(uri)
-            userRegistrationViewModel.updateProfile(image = uri.toString())
+            val imageBitmap = requireContext().imageUriToBitmap(uri)
+            imageBitmap?.let {
+                binding.ivAddPhoto.setImageURI(uri)
+                val imageBase64 = imageBitmapToBase64(imageBitmap)
+                userRegistrationViewModel.updateProfile(image = imageBase64)
+            }
         } else {
             Toast.makeText(
                 requireContext(),
