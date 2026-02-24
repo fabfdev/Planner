@@ -1,6 +1,7 @@
 package br.com.fabfdev.planner.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import br.com.fabfdev.planner.data.datasource.UserRegistrationLocalDataSource
 import br.com.fabfdev.planner.data.di.MainServiceLocator
 import br.com.fabfdev.planner.data.model.Profile
@@ -8,6 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class UserRegistrationViewModel: ViewModel() {
 
@@ -22,6 +24,14 @@ class UserRegistrationViewModel: ViewModel() {
         Profile()
     )
     val profile: StateFlow<Profile> = _profile.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            userRegistrationLocalDataSource.profile.collect { profile ->
+                _profile.value = profile
+            }
+        }
+    }
 
     fun isUserRegistered(): Boolean {
         return userRegistrationLocalDataSource.isUserRegistered()
@@ -50,6 +60,13 @@ class UserRegistrationViewModel: ViewModel() {
             )
             _isProfileValid.update { updatedProfile.isValid() }
             updatedProfile
+        }
+    }
+
+    fun saveProfile() {
+        viewModelScope.launch {
+            userRegistrationLocalDataSource.saveProfile(profile = profile.value)
+            userRegistrationLocalDataSource.saveIsUserRegistered(isUserRegistered = true)
         }
     }
 
