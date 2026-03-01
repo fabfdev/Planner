@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import br.com.fabfdev.planner.R
-import br.com.fabfdev.planner.data.utils.imageBase64ToBitmap
+import br.com.fabfdev.planner.domain.utils.imageBase64ToBitmap
 import br.com.fabfdev.planner.databinding.FragmentHomeBinding
 import br.com.fabfdev.planner.ui.viewmodel.UserRegistrationViewModel
 import com.google.android.material.snackbar.Snackbar

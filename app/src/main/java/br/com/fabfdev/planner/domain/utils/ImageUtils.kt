@@ -1,4 +1,4 @@
-package br.com.fabfdev.planner.data.utils
+package br.com.fabfdev.planner.domain.utils
 
 import android.content.Context
 import android.graphics.Bitmap

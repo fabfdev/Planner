@@ -13,8 +13,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import br.com.fabfdev.planner.R
-import br.com.fabfdev.planner.data.utils.imageBitmapToBase64
-import br.com.fabfdev.planner.data.utils.imageUriToBitmap
+import br.com.fabfdev.planner.domain.utils.imageBitmapToBase64
+import br.com.fabfdev.planner.domain.utils.imageUriToBitmap
 import br.com.fabfdev.planner.databinding.FragmentUserRegistrationBinding
 import br.com.fabfdev.planner.ui.viewmodel.UserRegistrationViewModel
 import kotlinx.coroutines.launch

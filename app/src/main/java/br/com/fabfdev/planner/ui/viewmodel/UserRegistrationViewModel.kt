@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.fabfdev.planner.data.datasource.AuthenticationLocalDataSource
 import br.com.fabfdev.planner.data.datasource.UserRegistrationLocalDataSource
-import br.com.fabfdev.planner.data.di.MainServiceLocator
+import br.com.fabfdev.planner.core.di.MainServiceLocator
 import br.com.fabfdev.planner.data.model.Profile
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay

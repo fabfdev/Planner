@@ -1,4 +1,4 @@
-package br.com.fabfdev.planner.data.di
+package br.com.fabfdev.planner.core.di
 
 import android.app.Application
 import br.com.fabfdev.planner.data.datasource.AuthenticationLocalDataSource
