@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import br.com.fabfdev.planner.data.datasource.AuthenticationLocalDataSource
 import br.com.fabfdev.planner.data.datasource.UserRegistrationLocalDataSource
 import br.com.fabfdev.planner.core.di.MainServiceLocator
-import br.com.fabfdev.planner.data.model.Profile
+import br.com.fabfdev.planner.domain.model.Profile
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow

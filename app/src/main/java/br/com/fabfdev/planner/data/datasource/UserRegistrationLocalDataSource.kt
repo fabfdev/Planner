@@ -1,6 +1,6 @@
 package br.com.fabfdev.planner.data.datasource
 
-import br.com.fabfdev.planner.data.model.Profile
+import br.com.fabfdev.planner.domain.model.Profile
 import kotlinx.coroutines.flow.Flow
 
 interface UserRegistrationLocalDataSource {

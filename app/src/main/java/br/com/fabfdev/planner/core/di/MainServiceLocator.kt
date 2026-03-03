@@ -7,6 +7,8 @@ import br.com.fabfdev.planner.data.database.PlannerActivityDao
 import br.com.fabfdev.planner.data.database.PlannerActivityDatabase
 import br.com.fabfdev.planner.data.datasource.AuthenticationLocalDataSource
 import br.com.fabfdev.planner.data.datasource.AuthenticationLocalDataSourceImpl
+import br.com.fabfdev.planner.data.datasource.PlannerActivityLocalDataSource
+import br.com.fabfdev.planner.data.datasource.PlannerActivityLocalDataSourceImpl
 import br.com.fabfdev.planner.data.datasource.UserRegistrationLocalDataSource
 import br.com.fabfdev.planner.data.datasource.UserRegistrationLocalDataSourceImpl
 
@@ -30,6 +32,10 @@ object MainServiceLocator {
         ).build()
 
         database.plannerActivityDao()
+    }
+
+    val plannerActivityLocalDataSource: PlannerActivityLocalDataSource by lazy {
+        PlannerActivityLocalDataSourceImpl(plannerActivityDao = plannerActivityDao)
     }
 
     fun initialize(application: Application) {

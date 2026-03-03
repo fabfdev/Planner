@@ -1,4 +1,4 @@
-package br.com.fabfdev.planner.data.model
+package br.com.fabfdev.planner.domain.model
 
 import androidx.datastore.core.Serializer
 import kotlinx.serialization.SerializationException
