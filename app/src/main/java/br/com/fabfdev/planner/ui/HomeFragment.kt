@@ -11,6 +11,8 @@ import androidx.lifecycle.lifecycleScope
 import br.com.fabfdev.planner.R
 import br.com.fabfdev.planner.domain.utils.imageBase64ToBitmap
 import br.com.fabfdev.planner.databinding.FragmentHomeBinding
+import br.com.fabfdev.planner.ui.component.PlannerActivityDatePickerDialogFragment
+import br.com.fabfdev.planner.ui.component.PlannerActivityTimePickerDialogFragment
 import br.com.fabfdev.planner.ui.viewmodel.UserRegistrationViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -38,6 +40,24 @@ class HomeFragment : Fragment() {
         setupObservers()
 
         with(binding) {
+            tietNewPlannerActivityDate.setOnClickListener {
+                PlannerActivityDatePickerDialogFragment(
+                    onConfirm = { year, month, day ->
+                        println("$year $month $day")
+                    },
+                    onCancel = {}
+                ).show(childFragmentManager, PlannerActivityDatePickerDialogFragment.TAG)
+            }
+
+            tietNewPlannerActivityTime.setOnClickListener {
+                PlannerActivityTimePickerDialogFragment(
+                    onConfirm = { hour, minute ->
+                        println("$hour, $minute")
+                    },
+                    onCancel = {}
+                ).show(childFragmentManager, PlannerActivityTimePickerDialogFragment.TAG)
+            }
+
             btnSaveNewPlannerActivity.setOnClickListener {
                 UpdatePlannerActivityDialogFragment()
                     .show(

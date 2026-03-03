@@ -22,4 +22,17 @@
         <item name="cornerSizeBottomRight">0dp</item>
     </style>
 
+    <style name="Theme.Planner.DatePickerDialog" parent="@android:style/Theme.Material.Dialog">
+        <item name="android:colorAccent">@color/lime_300</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/zinc_400</item>
+        <item name="android:colorBackground">@color/zinc_950</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/Theme.Planner.DatePickerDialog.Button</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/Theme.Planner.DatePickerDialog.Button</item>
+    </style>
+
+    <style name="Theme.Planner.DatePickerDialog.Button" parent="@android:style/Widget.Material.Button.Borderless.Colored">
+        <item name="android:textColor">@color/lime_300</item>
+    </style>
+
 </resources>
