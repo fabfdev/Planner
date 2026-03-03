@@ -1,6 +1,10 @@
 package br.com.fabfdev.planner.core.di
 
 import android.app.Application
+import androidx.room.Room
+import br.com.fabfdev.planner.data.database.PLANNER_ACTIVITY_DATABASE_NAME
+import br.com.fabfdev.planner.data.database.PlannerActivityDao
+import br.com.fabfdev.planner.data.database.PlannerActivityDatabase
 import br.com.fabfdev.planner.data.datasource.AuthenticationLocalDataSource
 import br.com.fabfdev.planner.data.datasource.AuthenticationLocalDataSourceImpl
 import br.com.fabfdev.planner.data.datasource.UserRegistrationLocalDataSource
@@ -16,6 +20,16 @@ object MainServiceLocator {
 
     val authenticationLocalDataSource: AuthenticationLocalDataSource by lazy {
         AuthenticationLocalDataSourceImpl(application.applicationContext)
+    }
+
+    val plannerActivityDao: PlannerActivityDao by lazy {
+        val database = Room.databaseBuilder(
+            application.applicationContext,
+            PlannerActivityDatabase::class.java,
+            PLANNER_ACTIVITY_DATABASE_NAME
+        ).build()
+
+        database.plannerActivityDao()
     }
 
     fun initialize(application: Application) {
