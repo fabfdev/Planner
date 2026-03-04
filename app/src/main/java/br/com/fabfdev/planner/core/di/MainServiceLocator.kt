@@ -11,10 +11,19 @@ import br.com.fabfdev.planner.data.datasource.PlannerActivityLocalDataSource
 import br.com.fabfdev.planner.data.datasource.PlannerActivityLocalDataSourceImpl
 import br.com.fabfdev.planner.data.datasource.UserRegistrationLocalDataSource
 import br.com.fabfdev.planner.data.datasource.UserRegistrationLocalDataSourceImpl
+import kotlinx.coroutines.Dispatchers
 
 object MainServiceLocator {
 
     private lateinit var application: Application
+
+    val ioDispatcher by lazy {
+        Dispatchers.IO
+    }
+
+    val mainDispatcher by lazy {
+        Dispatchers.Main
+    }
 
     val userRegistrationLocalDataSource: UserRegistrationLocalDataSource by lazy {
         UserRegistrationLocalDataSourceImpl(application.applicationContext)
