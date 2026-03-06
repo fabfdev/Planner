@@ -1,4 +1,4 @@
-package br.com.fabfdev.planner.ui.viewmodel
+package br.com.fabfdev.planner.presentation.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/md_16dp"
-    tools:context=".ui.HomeFragment">
+    tools:context=".presentation.ui.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,30 +15,30 @@
             android:id="@+id/ivLogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/img_logo"
             android:contentDescription="@string/imagem_logo"
-            app:layout_constraintHorizontal_bias="0"
+            android:src="@drawable/img_logo"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-        
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/mtvUserPhoto"
             android:layout_width="@dimen/xl_64dp"
             android:layout_height="@dimen/xl_64dp"
             android:layout_marginTop="@dimen/md_16dp"
             app:cardCornerRadius="@dimen/xm_32dp"
-            app:strokeColor="@color/zinc_700"
-            app:strokeWidth="@dimen/xxs_2dp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivLogo"
-            app:layout_constraintStart_toStartOf="parent">
+            app:strokeColor="@color/zinc_700"
+            app:strokeWidth="@dimen/xxs_2dp">
 
             <ImageView
                 android:id="@+id/ivUserPhoto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/img_this_person_does_not_exist"
-                android:contentDescription="@string/imagem_foto_do_usuario"/>
+                android:contentDescription="@string/imagem_foto_do_usuario"
+                android:src="@drawable/img_this_person_does_not_exist" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -46,37 +46,37 @@
             android:id="@+id/tvUserName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/md_16dp"
             android:text="@string/ola_usuario"
             android:textSize="16sp"
-            android:layout_marginStart="@dimen/md_16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/mtvUserPhoto"
             app:layout_constraintStart_toEndOf="@+id/mtvUserPhoto"
-            app:layout_constraintTop_toTopOf="@+id/mtvUserPhoto"
-            app:layout_constraintBottom_toBottomOf="@+id/mtvUserPhoto"/>
+            app:layout_constraintTop_toTopOf="@+id/mtvUserPhoto" />
 
         <LinearLayout
             android:id="@+id/llNewPlannerActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/sm_8dp"
             android:gravity="center"
             android:orientation="vertical"
-            android:layout_marginTop="@dimen/sm_8dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mtvUserPhoto"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/mtvUserPhoto">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilNewPlannerActivityName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:startIconDrawable="@drawable/ic_tag"
-                android:layout_marginBottom="@dimen/sm_8dp">
+                android:layout_marginBottom="@dimen/sm_8dp"
+                app:startIconDrawable="@drawable/ic_tag">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/tietNewPlannerActivityName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/qual_a_atividade"
-                    android:inputType="textCapSentences"/>
+                    android:inputType="textCapSentences" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,8 +84,8 @@
                 android:id="@+id/tilNewPlannerActivityDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:startIconDrawable="@drawable/ic_calendar"
-                android:layout_marginBottom="@dimen/sm_8dp">
+                android:layout_marginBottom="@dimen/sm_8dp"
+                app:startIconDrawable="@drawable/ic_calendar">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/tietNewPlannerActivityDate"
@@ -123,31 +123,32 @@
             android:layout_marginTop="@dimen/md_16dp"
             android:text="@string/salvar_atividade"
             android:textColor="@color/lime_950"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/llNewPlannerActivity"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/llNewPlannerActivity" />
 
         <TextView
-            style="@style/Title"
             android:id="@+id/tvPlannerActivitiesTitle"
+            style="@style/Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/atividades"
             android:layout_marginTop="@dimen/md_16dp"
+            android:text="@string/atividades"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnSaveNewPlannerActivity"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/btnSaveNewPlannerActivity" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPlannerActivities"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/md_16dp"
-            tools:itemCount="8"
-            tools:listitem="@layout/item_planner_activity"
-            app:layout_constraintTop_toBottomOf="@+id/tvPlannerActivitiesTitle"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/tvPlannerActivitiesTitle"
+            tools:itemCount="8"
+            tools:listitem="@layout/item_planner_activity" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

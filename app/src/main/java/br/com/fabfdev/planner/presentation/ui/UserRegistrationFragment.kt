@@ -1,4 +1,4 @@
-package br.com.fabfdev.planner.ui
+package br.com.fabfdev.planner.presentation.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,7 +16,7 @@ import br.com.fabfdev.planner.R
 import br.com.fabfdev.planner.domain.utils.imageBitmapToBase64
 import br.com.fabfdev.planner.domain.utils.imageUriToBitmap
 import br.com.fabfdev.planner.databinding.FragmentUserRegistrationBinding
-import br.com.fabfdev.planner.ui.viewmodel.UserRegistrationViewModel
+import br.com.fabfdev.planner.presentation.ui.viewmodel.UserRegistrationViewModel
 import kotlinx.coroutines.launch
 
 class UserRegistrationFragment : Fragment() {

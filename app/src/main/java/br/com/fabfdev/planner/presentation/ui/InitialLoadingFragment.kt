@@ -1,4 +1,4 @@
-package br.com.fabfdev.planner.ui
+package br.com.fabfdev.planner.presentation.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import br.com.fabfdev.planner.R
 import br.com.fabfdev.planner.databinding.FragmentInitialLoadingBinding
-import br.com.fabfdev.planner.ui.viewmodel.UserRegistrationViewModel
+import br.com.fabfdev.planner.presentation.ui.viewmodel.UserRegistrationViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

@@ -1,4 +1,4 @@
-package br.com.fabfdev.planner.ui
+package br.com.fabfdev.planner.presentation.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater

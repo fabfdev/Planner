@@ -1,4 +1,4 @@
-package br.com.fabfdev.planner.ui.component
+package br.com.fabfdev.planner.presentation.ui.component
 
 import android.app.DatePickerDialog
 import android.app.Dialog

@@ -1,11 +1,13 @@
-package br.com.fabfdev.planner.ui.viewmodel
+package br.com.fabfdev.planner.presentation.ui.viewmodel
 
+import android.icu.util.Calendar
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.fabfdev.planner.core.di.MainServiceLocator
 import br.com.fabfdev.planner.core.di.MainServiceLocator.ioDispatcher
 import br.com.fabfdev.planner.data.datasource.PlannerActivityLocalDataSource
 import br.com.fabfdev.planner.domain.model.PlannerActivity
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -22,17 +24,29 @@ class PlannerActivityViewModel : ViewModel() {
     private val _activities: MutableStateFlow<List<PlannerActivity>> = MutableStateFlow(emptyList())
     val activities: StateFlow<List<PlannerActivity>> = _activities.asStateFlow()
 
-    init {
+    fun fetchActivities() {
         viewModelScope.launch {
-            plannerActivityLocalDataSource.plannerActivities
-                .flowOn(ioDispatcher)
-                .collect { activities ->
-                    _activities.emit(activities)
-                }
+            launch {
+                plannerActivityLocalDataSource.plannerActivities
+                    .flowOn(ioDispatcher)
+                    .collect { activities ->
+                        _activities.emit(activities)
+                    }
+            }
+            launch {
+                delay(3_000L)
+                insert("Teste 1", Calendar.getInstance().timeInMillis)
+                delay(3_000L)
+                insert("Teste 2", Calendar.getInstance().timeInMillis)
+                delay(3_000L)
+                val calendar = Calendar.getInstance()
+                calendar.add(Calendar.DAY_OF_MONTH, 3)
+                insert("Teste 3", calendar.timeInMillis)
+            }
         }
     }
 
-    fun insertPlannerActivity(name: String, datetime: Long) {
+    fun insert(name: String, datetime: Long) {
         viewModelScope.launch(ioDispatcher) {
             val plannerActivity = PlannerActivity(
                 uuid = UUID.randomUUID().toString(),

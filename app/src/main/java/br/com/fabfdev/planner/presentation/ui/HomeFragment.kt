@@ -1,4 +1,4 @@
-package br.com.fabfdev.planner.ui
+package br.com.fabfdev.planner.presentation.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,9 +11,11 @@ import androidx.lifecycle.lifecycleScope
 import br.com.fabfdev.planner.R
 import br.com.fabfdev.planner.domain.utils.imageBase64ToBitmap
 import br.com.fabfdev.planner.databinding.FragmentHomeBinding
-import br.com.fabfdev.planner.ui.component.PlannerActivityDatePickerDialogFragment
-import br.com.fabfdev.planner.ui.component.PlannerActivityTimePickerDialogFragment
-import br.com.fabfdev.planner.ui.viewmodel.UserRegistrationViewModel
+import br.com.fabfdev.planner.presentation.ui.component.PlannerActivityAdapter
+import br.com.fabfdev.planner.presentation.ui.component.PlannerActivityDatePickerDialogFragment
+import br.com.fabfdev.planner.presentation.ui.component.PlannerActivityTimePickerDialogFragment
+import br.com.fabfdev.planner.presentation.ui.viewmodel.PlannerActivityViewModel
+import br.com.fabfdev.planner.presentation.ui.viewmodel.UserRegistrationViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
@@ -24,6 +26,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     val userRegistrationViewModel: UserRegistrationViewModel by activityViewModels()
+    val plannerActivityViewModel: PlannerActivityViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +43,9 @@ class HomeFragment : Fragment() {
         setupObservers()
 
         with(binding) {
+            rvPlannerActivities.adapter = PlannerActivityAdapter()
+            plannerActivityViewModel.fetchActivities()
+
             tietNewPlannerActivityDate.setOnClickListener {
                 PlannerActivityDatePickerDialogFragment(
                     onConfirm = { year, month, day ->
@@ -87,6 +93,18 @@ class HomeFragment : Fragment() {
                 }.collect { isValid ->
                     if (isValid == false) {
                         showNewTokenSnackBar()
+                    }
+                }
+            }
+            launch {
+                plannerActivityViewModel.activities.collect { activities ->
+                    with(binding) {
+                        if (rvPlannerActivities.adapter == null) {
+                            rvPlannerActivities.adapter = PlannerActivityAdapter()
+                        }
+                        (rvPlannerActivities.adapter as PlannerActivityAdapter).submitList(
+                            activities
+                        )
                     }
                 }
             }
