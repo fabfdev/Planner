@@ -5,7 +5,7 @@ import android.icu.util.Calendar
 import java.util.Locale
 
 private val sdfPlannerActivityDateTime = SimpleDateFormat(
-    "EEE dd' \n'HH:mm",
+    "EEE dd'\n'HH:mm",
     Locale.forLanguageTag("pt-BR")
 )
 private val sdfPlannerActivityDate = SimpleDateFormat(
