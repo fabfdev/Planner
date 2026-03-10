@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import br.com.fabfdev.planner.R
 import br.com.fabfdev.planner.databinding.FragmentUpdatePlannerActivityDialogBinding
+import br.com.fabfdev.planner.domain.model.PlannerActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class UpdatePlannerActivityDialogFragment : BottomSheetDialogFragment() {
+class UpdatePlannerActivityDialogFragment(
+    private val selectedActivity: PlannerActivity,
+) : BottomSheetDialogFragment() {
 
     private var _binding: FragmentUpdatePlannerActivityDialogBinding? = null
     private val binding get() = _binding!!

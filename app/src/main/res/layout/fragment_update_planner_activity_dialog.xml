@@ -76,16 +76,25 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:id="@+id/tvUpdatedPlannerActivityDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/md_16dp"
+            android:text="@string/excluir_atividade"
+            android:textAlignment="center"
+            android:textColor="@color/zinc_500" />
+
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
-        style="@style/ThemeOverlay.Material3.Button.ElevatedButton"
         android:id="@+id/btnSaveUpdatedPlannerActivity"
+        style="@style/ThemeOverlay.Material3.Button.ElevatedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/lime_300"
         android:text="@string/salvar_usuario"
         android:textColor="@color/lime_950"
-        android:backgroundTint="@color/lime_300"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llUpdatedPlannerActivity" />
