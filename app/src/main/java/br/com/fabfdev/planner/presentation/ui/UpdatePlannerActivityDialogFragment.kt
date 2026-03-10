@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import br.com.fabfdev.planner.R
 import br.com.fabfdev.planner.databinding.FragmentUpdatePlannerActivityDialogBinding
 import br.com.fabfdev.planner.domain.model.PlannerActivity
+import br.com.fabfdev.planner.domain.utils.createCalendarFromTimeInMillis
+import br.com.fabfdev.planner.domain.utils.toPlannerActivityDate
+import br.com.fabfdev.planner.domain.utils.toPlannerActivityTime
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class UpdatePlannerActivityDialogFragment(
@@ -27,6 +30,24 @@ class UpdatePlannerActivityDialogFragment(
     ): View {
         _binding = FragmentUpdatePlannerActivityDialogBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        with(binding) {
+            val selectedActivityDatetimeCalendar = createCalendarFromTimeInMillis(
+                selectedActivity.datetime
+            )
+
+            tietUpdatedPlannerActivityName.setText(selectedActivity.name)
+            tietUpdatedPlannerActivityDate.setText(
+                selectedActivityDatetimeCalendar.toPlannerActivityDate()
+            )
+            tietUpdatedPlannerActivityTime.setText(
+                selectedActivityDatetimeCalendar.toPlannerActivityTime()
+            )
+        }
     }
 
     override fun onDestroyView() {

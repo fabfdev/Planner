@@ -7,6 +7,7 @@ import br.com.fabfdev.planner.core.di.MainServiceLocator
 import br.com.fabfdev.planner.core.di.MainServiceLocator.ioDispatcher
 import br.com.fabfdev.planner.data.datasource.PlannerActivityLocalDataSource
 import br.com.fabfdev.planner.domain.model.PlannerActivity
+import br.com.fabfdev.planner.domain.utils.createCalendarFromTimeInMillis
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -28,6 +29,56 @@ class PlannerActivityViewModel : ViewModel() {
     private val newActivity: MutableStateFlow<NewPlannerActivity> = MutableStateFlow(
         NewPlannerActivity()
     )
+
+    private val updatedActivity: MutableStateFlow<PlannerActivity?> = MutableStateFlow(null)
+
+    fun setSelectedActivity(selectedActivity: PlannerActivity) {
+        updatedActivity.value = selectedActivity
+    }
+
+    fun clearSelectedActivity() {
+        updatedActivity.value = null
+    }
+
+    fun updatedSelectedActivity(
+        name: String? = null,
+        date: SetDate? = null,
+        time: SetTime? = null,
+    ) {
+        if (name == null && date == null && time == null) {
+            return
+        }
+
+        updatedActivity.update { currentUpdatedActivity ->
+            currentUpdatedActivity?.let { current ->
+                val updatedDatetimeCalendar = createCalendarFromTimeInMillis(
+                    current.datetime
+                )
+
+                updatedDatetimeCalendar.apply {
+                    if (date != null) {
+                        set(Calendar.YEAR, date.year)
+                        set(Calendar.MONTH, date.month)
+                        set(Calendar.DAY_OF_MONTH, date.dayOfMonth)
+                    }
+
+                    if (time != null) {
+                        set(Calendar.HOUR_OF_DAY, time.hourOfDay)
+                        set(Calendar.MINUTE, time.minute)
+                    }
+                }
+
+                current.copy(
+                    name = name ?: current.name,
+                    datetime = updatedDatetimeCalendar.timeInMillis
+                )
+            }
+        }
+    }
+
+    fun saveUpdatedSelected() {
+        updatedActivity.value?.let { update(it) }
+    }
 
     fun updateNewActivity(
         name: String? = null,
@@ -72,7 +123,16 @@ class PlannerActivityViewModel : ViewModel() {
         }
     }
 
-    fun insert(name: String, datetime: Long) {
+    fun updateIsCompleted(uuid: String, isCompleted: Boolean) {
+        viewModelScope.launch(ioDispatcher) {
+            plannerActivityLocalDataSource.updateIsCompletedByUUID(
+                uuid,
+                isCompleted
+            )
+        }
+    }
+
+    private fun insert(name: String, datetime: Long) {
         viewModelScope.launch(ioDispatcher) {
             val plannerActivity = PlannerActivity(
                 uuid = UUID.randomUUID().toString(),
@@ -84,7 +144,7 @@ class PlannerActivityViewModel : ViewModel() {
         }
     }
 
-    fun update(updatedPlannerActivity: PlannerActivity) {
+    private fun update(updatedPlannerActivity: PlannerActivity) {
         viewModelScope.launch(ioDispatcher) {
             plannerActivityLocalDataSource.update(
                 updatedPlannerActivity
@@ -92,16 +152,7 @@ class PlannerActivityViewModel : ViewModel() {
         }
     }
 
-    fun updateIsCompleted(uuid: String, isCompleted: Boolean) {
-        viewModelScope.launch(ioDispatcher) {
-            plannerActivityLocalDataSource.updateIsCompletedByUUID(
-                uuid,
-                isCompleted
-            )
-        }
-    }
-
-    fun delete(uuid: String) {
+    private fun delete(uuid: String) {
         viewModelScope.launch(ioDispatcher) { plannerActivityLocalDataSource.deleteByUUID(uuid) }
     }
 
