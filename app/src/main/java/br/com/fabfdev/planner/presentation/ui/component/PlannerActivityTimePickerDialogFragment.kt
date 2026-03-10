@@ -11,13 +11,14 @@ import androidx.fragment.app.DialogFragment
 import br.com.fabfdev.planner.R
 
 class PlannerActivityTimePickerDialogFragment(
+    private val initialTime: Calendar? = null,
     private val onConfirm: (Int, Int) -> Unit,
     private val onCancel: () -> Unit,
 ) : DialogFragment(),
     TimePickerDialog.OnTimeSetListener {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val calendar = Calendar.getInstance()
+        val calendar = initialTime ?: Calendar.getInstance()
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
         val minute = calendar.get(Calendar.MINUTE)
         return TimePickerDialog(
