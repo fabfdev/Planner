@@ -152,7 +152,7 @@ class PlannerActivityViewModel : ViewModel() {
         }
     }
 
-    private fun delete(uuid: String) {
+    fun delete(uuid: String) {
         viewModelScope.launch(ioDispatcher) { plannerActivityLocalDataSource.deleteByUUID(uuid) }
     }
 
