@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
 import br.com.fabfdev.planner.R
-import br.com.fabfdev.planner.databinding.FragmentUpdatePlannerActivityDialogBinding
+import br.com.fabfdev.planner.databinding.FragmentDialogUpdatePlannerActivityBinding
 import br.com.fabfdev.planner.domain.model.PlannerActivity
 import br.com.fabfdev.planner.domain.utils.createCalendarFromTimeInMillis
 import br.com.fabfdev.planner.domain.utils.toPlannerActivityDate
@@ -26,7 +26,7 @@ class UpdatePlannerActivityDialogFragment(
     private val selectedActivity: PlannerActivity,
 ) : BottomSheetDialogFragment() {
 
-    private var _binding: FragmentUpdatePlannerActivityDialogBinding? = null
+    private var _binding: FragmentDialogUpdatePlannerActivityBinding? = null
     private val binding get() = _binding!!
 
     private val plannerActivityViewModel: PlannerActivityViewModel by activityViewModels()
@@ -40,7 +40,7 @@ class UpdatePlannerActivityDialogFragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentUpdatePlannerActivityDialogBinding.inflate(inflater, container, false)
+        _binding = FragmentDialogUpdatePlannerActivityBinding.inflate(inflater, container, false)
         return binding.root
     }
 
